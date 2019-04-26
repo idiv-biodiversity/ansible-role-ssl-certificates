@@ -49,7 +49,7 @@ ssl_certificates:
 
 **Note:** It is recommended to [put the key in a vault][vault]!
 
-**Note:** This role does not handle **selinux** yet. Feel free to contribute!
+**Note:** `key`, `cert` and `chain` also allow to set a custom `setype`, default is `cert_t`.
 
 Dependencies
 ------------
