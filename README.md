@@ -64,7 +64,7 @@ Add to `requirements.yml`:
 ```yml
 ---
 
-- src: idiv-biodiversity.ssl-certificates
+- src: idiv-biodiversity.ssl_certificates
 
 ...
 ```
@@ -86,7 +86,7 @@ Write a top-level playbook:
   hosts: head
 
   roles:
-    - role: idiv-biodiversity.ssl-certificates
+    - role: idiv-biodiversity.ssl_certificates
       tags:
         - certificates
         - ssl-certificates
@@ -103,7 +103,7 @@ Define the role dependency in `meta/main.yml`:
 
 dependencies:
 
-  - role: idiv-biodiversity.ssl-certificates
+  - role: idiv-biodiversity.ssl_certificates
     tags:
       - certificates
       - ssl-certificates
