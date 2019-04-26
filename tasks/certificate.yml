@@ -37,7 +37,7 @@
 
 - name: install certificate
   copy:
-    content: '{{ cert_item.cert.content }}'
+    src: '{{ cert_item.cert.src }}'
     dest: '{{ cert_item.cert.dest }}'
     owner: root
     group: root
@@ -60,7 +60,7 @@
 
 - name: install chain
   copy:
-    content: '{{ cert_item.chain.content }}'
+    src: '{{ cert_item.chain.src }}'
     dest: '{{ cert_item.chain.dest }}'
     owner: root
     group: root

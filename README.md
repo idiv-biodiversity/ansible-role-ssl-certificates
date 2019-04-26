@@ -29,25 +29,20 @@ ssl_certificates:
       content: '{{ vault_ssl_certificate_key }}'
     cert:
       dest: /path/to/cert.pem
-      content: |
-        -----BEGIN CERTIFICATE-----
-        ...
-        -----END CERTIFICATE-----
+      src: path/to/cert.pem
     chain:
       dest: /path/to/chain
-      content: |
-        -----BEGIN CERTIFICATE-----
-        ...
-        -----END CERTIFICATE-----
-        subject= ...
-        -----BEGIN CERTIFICATE-----
-        ...
+      content: path/to/chain
   - name: somehosts ssl certificate for bippy.example.com
     key:
       ...
 ```
 
 **Note:** It is recommended to [put the key in a vault][vault]!
+
+**Note:** Ensure that Ansible can find the `src` files. `group_vars/group` and
+`host_vars/host` are not automatically searched. If you want to keep the files there,
+use e.g. `host_vars/host/example.com.pem`.
 
 **Note:** `key`, `cert` and `chain` also allow to set a custom `setype`, default is `cert_t`.
 
