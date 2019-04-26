@@ -10,7 +10,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0750
+    mode: 0755
 
 - name: install key
   copy:
@@ -18,7 +18,7 @@
     dest: '{{ cert_item.key.dest }}'
     owner: root
     group: root
-    mode: 0644
+    mode: 0600
 
 # -----------------------------------------------------------------------------
 # certificate
@@ -30,7 +30,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0750
+    mode: 0755
 
 - name: install certificate
   copy:
@@ -50,7 +50,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0750
+    mode: 0755
   when: cert_item.chain is defined
 
 - name: install chain
