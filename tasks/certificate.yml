@@ -10,7 +10,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: '{{ cert_item.key.mode | default("0755") }}'
     setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 - name: install key
