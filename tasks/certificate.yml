@@ -24,7 +24,7 @@
 # certificate
 # -----------------------------------------------------------------------------
 
-- name: crate certificate directory
+- name: create certificate directory
   file:
     path: '{{ cert_item.cert.dest | dirname }}'
     state: directory
