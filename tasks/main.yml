@@ -1,0 +1,10 @@
+---
+
+- name: deploy certificate
+  include_tasks: certificate.yml
+  loop: '{{ ssl_certificates }}'
+  loop_control:
+    loop_var: cert_item
+    label: '{{ certificate.name }}'
+
+...

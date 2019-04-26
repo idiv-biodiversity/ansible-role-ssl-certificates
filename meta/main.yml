@@ -1,0 +1,21 @@
+---
+
+galaxy_info:
+
+  author: Christian Krause
+  description: install SSL certificates
+  company: German Centre for Integrative Biodiversity Research (iDiv)
+  license: MIT
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: EL
+      versions:
+        - all
+
+  galaxy_tags:
+    - ssl
+    - cert
+    - certificate
+
+...

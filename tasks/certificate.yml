@@ -1,0 +1,65 @@
+---
+
+# -----------------------------------------------------------------------------
+# key
+# -----------------------------------------------------------------------------
+
+- name: create key directory
+  file:
+    path: '{{ cert_item.key.dest | dirname }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
+- name: install key
+  copy:
+    content: '{{ cert_item.key.content }}'
+    dest: '{{ cert_item.key.dest }}'
+    owner: root
+    group: root
+    mode: 0644
+
+# -----------------------------------------------------------------------------
+# certificate
+# -----------------------------------------------------------------------------
+
+- name: crate certificate directory
+  file:
+    path: '{{ cert_item.cert.dest | dirname }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
+- name: install certificate
+  copy:
+    content: '{{ cert_item.cert.content }}'
+    dest: '{{ cert_item.cert.dest }}'
+    owner: root
+    group: root
+    mode: 0644
+
+# -----------------------------------------------------------------------------
+# chain (optional)
+# -----------------------------------------------------------------------------
+
+- name: create chain directory
+  file:
+    path: '{{ cert_item.chain.dest | dirname }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+  when: cert_item.chain is defined
+
+- name: install chain
+  copy:
+    content: '{{ cert_item.chain.content }}'
+    dest: '{{ cert_item.chain.dest }}'
+    owner: root
+    group: root
+    mode: 0644
+  when: cert_item.chain is defined
+
+...
