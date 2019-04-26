@@ -11,6 +11,7 @@
     owner: root
     group: root
     mode: 0755
+    setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 - name: install key
   copy:
@@ -19,6 +20,7 @@
     owner: root
     group: root
     mode: 0600
+    setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 # -----------------------------------------------------------------------------
 # certificate
@@ -31,6 +33,7 @@
     owner: root
     group: root
     mode: 0755
+    setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 - name: install certificate
   copy:
@@ -39,6 +42,7 @@
     owner: root
     group: root
     mode: 0644
+    setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 # -----------------------------------------------------------------------------
 # chain (optional)
@@ -51,6 +55,7 @@
     owner: root
     group: root
     mode: 0755
+    setype: '{{ cert_item.key.setype | default("cert_t") }}'
   when: cert_item.chain is defined
 
 - name: install chain
@@ -60,6 +65,7 @@
     owner: root
     group: root
     mode: 0644
+    setype: '{{ cert_item.key.setype | default("cert_t") }}'
   when: cert_item.chain is defined
 
 ...
