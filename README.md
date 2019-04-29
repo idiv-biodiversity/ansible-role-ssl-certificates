@@ -42,7 +42,7 @@ ssl_certificates:
       src: path/to/cert.pem
     chain:
       dest: /path/to/chain
-      content: path/to/chain
+      src: path/to/chain
   - name: somehosts ssl certificate for bippy.example.com
     key:
       ...
