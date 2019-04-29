@@ -10,6 +10,7 @@ Table of Contents
 
 - [Requirements](#requirements)
 - [Role Variables](#role-variables)
+  * [Re-Use Destination Variables](#re-use-destination-variables)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
   * [Top-Level Playbook](#top-level-playbook)
@@ -51,10 +52,42 @@ ssl_certificates:
 **Note:** It is recommended to [put the key in a vault][vault]!
 
 **Note:** Ensure that Ansible can find the `src` files. `group_vars/group` and
-`host_vars/host` are not automatically searched. If you want to keep the files there,
-use e.g. `host_vars/host/example.com.pem`.
+`host_vars/host` are not automatically searched. If you want to keep the files
+there, use e.g. `host_vars/host/example.com.pem`.
 
-**Note:** `key`, `cert` and `chain` also allow to set a custom `setype`, default is `cert_t`.
+**Note:** `key`, `cert` and `chain` also allow to set a custom `setype`,
+default is `cert_t`.
+
+### Re-Use Destination Variables
+
+You can re-use the **destination** variables for the configuration variables of
+other roles, e.g.:
+
+```yml
+---
+
+ssl_certificates:
+  - name: somehosts ssl certificate for blah.example.com
+    ...
+  - name: ...
+    ...
+
+# because ssl_certificates is a list, you need to index with [n]
+
+apache_ssl_cert_key_file: '{{ ssl_certificates[0].key.dest }}'
+apache_ssl_cert_file: '{{ ssl_certificates[0].cert.dest }}'
+apache_ssl_cert_chain_file: '{{ ssl_certificates[0].chain.dest }}'
+
+# here, the second key is used for postfix
+
+postfix_smtp_tls_key_file: '{{ ssl_certificates[1].key.dest }}'
+postfix_smtp_tls_cert_file: '{{ ssl_certificates[1].cert.dest }}'
+
+postfix_smtpd_tls_key_file: '{{ ssl_certificates[1].key.dest }}'
+postfix_smtpd_tls_cert_file: '{{ ssl_certificates[1].cert.dest }}'
+
+...
+```
 
 Dependencies
 ------------
