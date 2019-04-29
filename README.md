@@ -35,14 +35,14 @@ requires a `key` and a `cert`, and optionally a `chain`.
 ssl_certificates:
   - name: somehosts ssl certificate for blah.example.com
     key:
-      dest: /path/to/key.pem
       content: '{{ vault_ssl_certificate_key }}'
+      dest: /path/to/key.pem
     cert:
-      dest: /path/to/cert.pem
       src: path/to/cert.pem
+      dest: /path/to/cert.pem
     chain:
-      dest: /path/to/chain
       src: path/to/chain
+      dest: /path/to/chain
   - name: somehosts ssl certificate for bippy.example.com
     key:
       ...
