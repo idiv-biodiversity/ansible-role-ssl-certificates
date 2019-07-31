@@ -23,8 +23,19 @@
     dest: '{{ cert_item.key.dest }}'
     owner: root
     group: root
-    mode: 0600
+    mode: '{{ cert_item.key.acl_users is defined | ternary("0640", "0600") }}'
     setype: '{{ cert_item.key.setype | default("cert_t") }}'
+
+- name: set key acl entries
+  acl:
+    path: '{{ cert_item.key.dest }}'
+    entity: '{{ user_item }}'
+    etype: user
+    permissions: r
+    state: present
+  loop: '{{ cert_item.key.acl_users }}'
+  loop_control:
+    loop_var: user_item
 
 # -----------------------------------------------------------------------------
 # certificate

@@ -58,6 +58,23 @@ there, use e.g. `host_vars/host/example.com.pem`.
 **Note:** `key`, `cert` and `chain` also allow to set a custom `setype`,
 default is `cert_t`.
 
+**Note:** `key` also allows a list to give additional read permissions via ACL
+entries. This is for services that need access to the key which do not start as
+**root** and then drop privileges.
+
+```yml
+ssl_certificates:
+  - name: somehosts ssl certificate for blah.example.com
+    key:
+      content: '{{ vault_ssl_certificate_key }}'
+      dest: /path/to/key.pem
+      acl_users:
+        - service-user-a
+        - service-user-b
+    cert:
+      ...
+```
+
 ### Re-Use Destination Variables
 
 You can re-use the **destination** variables for the configuration variables of
