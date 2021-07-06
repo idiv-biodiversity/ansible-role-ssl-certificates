@@ -1,6 +1,7 @@
 ---
 
-- debug:
+- name: show certificate name
+  debug:
     msg: 'deploy {{ cert_item.name }}'
   when: ansible_check_mode or ansible_diff_mode
 
