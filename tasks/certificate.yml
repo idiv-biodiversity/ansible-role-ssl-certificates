@@ -34,6 +34,7 @@
     etype: user
     permissions: r
     state: present
+  when: cert_item.key.acl_users is defined
   loop: '{{ cert_item.key.acl_users }}'
   loop_control:
     loop_var: user_item
