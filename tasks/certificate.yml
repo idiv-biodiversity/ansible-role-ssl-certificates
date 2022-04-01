@@ -1,7 +1,7 @@
 ---
 
 - name: show certificate name
-  debug:
+  ansible.builtin.debug:
     msg: 'deploy {{ cert_item.name }}'
   when: ansible_check_mode or ansible_diff_mode
 
@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------------------
 
 - name: create key directory
-  file:
+  ansible.builtin.file:
     path: '{{ cert_item.key.dest | dirname }}'
     state: directory
     owner: root
@@ -19,7 +19,7 @@
     setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 - name: install key
-  copy:
+  ansible.builtin.copy:
     content: '{{ cert_item.key.content }}'
     dest: '{{ cert_item.key.dest }}'
     owner: root
@@ -28,7 +28,7 @@
     setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 - name: set key acl entries
-  acl:
+  ansible.posix.acl:
     path: '{{ cert_item.key.dest }}'
     entity: '{{ user_item }}'
     etype: user
@@ -44,7 +44,7 @@
 # -----------------------------------------------------------------------------
 
 - name: create certificate directory
-  file:
+  ansible.builtin.file:
     path: '{{ cert_item.cert.dest | dirname }}'
     state: directory
     owner: root
@@ -53,7 +53,7 @@
     setype: '{{ cert_item.key.setype | default("cert_t") }}'
 
 - name: install certificate
-  copy:
+  ansible.builtin.copy:
     src: '{{ cert_item.cert.src }}'
     dest: '{{ cert_item.cert.dest }}'
     owner: root
@@ -66,7 +66,7 @@
 # -----------------------------------------------------------------------------
 
 - name: create chain directory
-  file:
+  ansible.builtin.file:
     path: '{{ cert_item.chain.dest | dirname }}'
     state: directory
     owner: root
@@ -76,7 +76,7 @@
   when: cert_item.chain is defined
 
 - name: install chain
-  copy:
+  ansible.builtin.copy:
     src: '{{ cert_item.chain.src }}'
     dest: '{{ cert_item.chain.dest }}'
     owner: root
