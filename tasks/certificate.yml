@@ -26,6 +26,7 @@
     group: root
     mode: '{{ cert_item.key.acl_users is defined | ternary("0640", "0600") }}'
     setype: '{{ cert_item.key.setype | default("cert_t") }}'
+  no_log: yes
 
 - name: set key acl entries
   ansible.posix.acl:
